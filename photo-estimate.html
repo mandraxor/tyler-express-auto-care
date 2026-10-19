@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>60-Sec Smartphone Collision Photo Uploader &amp; Deductible Calculator | Tyler Express</title>
+  <meta name="description" content="Upload 4 collision damage photos from your phone and calculate your $250–$1,500 insurance deductible savings with Hector Montes at 3070 W Sirius Ave Unit 108." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="photo-estimate">
+  <div id="globalHeaderMount"></div>
+
+  <main>
+    <section class="section-light">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow-tag eyebrow-amber">SIRIUS AVE COLLISION TRIAGE • /photo-estimate</span>
+          <h1 class="section-title">60-Second Smartphone Damage Photo Uploader &amp; Deductible Calculator</h1>
+          <p class="section-subtitle">
+            Drop 4 quick photos from your phone, drag the deductible relief slider ($250–$1,500), and get an instant Priority Collision Ticket with Hector Montes at 3070 W Sirius Ave Unit 108.
+          </p>
+        </div>
+
+        <div class="grid-2" style="align-items: start;">
+          <!-- Left: 4-Slot Interactive Photo Dropzone -->
+          <div class="card-light">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem;">
+                <div>
+                  <h2 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800;">4-Slot Smartphone Photo Dropzone</h2>
+                  <p style="font-size: 0.82rem; color: var(--text-muted-light);">Tap any slot or drag-and-drop photos</p>
+                </div>
+                <button type="button" id="loadDemoCrashPhotosBtn" class="btn btn-collision-amber" style="padding: 0.48rem 0.9rem; font-size: 0.78rem;">
+                  ⚡ Load Sample Crash Photos (Demo)
+                </button>
+              </div>
+
+              <div class="photo-slots-grid">
+                <div class="photo-slot-card">
+                  <input type="file" accept="image/*" class="slot-file-input" style="display: none;" />
+                  <img class="slot-preview-img" alt="Slot 1 Preview" />
+                  <div class="slot-icon-placeholder" style="font-size: 1.8rem;">📸</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;">1. Full Vehicle Angle</div>
+                  <div class="mono slot-status-tag" style="font-size: 0.72rem; color: #0284C7; margin-top: 0.35rem;">Tap or drop photo</div>
+                </div>
+
+                <div class="photo-slot-card">
+                  <input type="file" accept="image/*" class="slot-file-input" style="display: none;" />
+                  <img class="slot-preview-img" alt="Slot 2 Preview" />
+                  <div class="slot-icon-placeholder" style="font-size: 1.8rem;">💥</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;">2. Close-Up of Crash / Dent</div>
+                  <div class="mono slot-status-tag" style="font-size: 0.72rem; color: #0284C7; margin-top: 0.35rem;">Tap or drop photo</div>
+                </div>
+
+                <div class="photo-slot-card">
+                  <input type="file" accept="image/*" class="slot-file-input" style="display: none;" />
+                  <img class="slot-preview-img" alt="Slot 3 Preview" />
+                  <div class="slot-icon-placeholder" style="font-size: 1.8rem;">🔢</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;">3. VIN Barcode (Door Jamb)</div>
+                  <div class="mono slot-status-tag" style="font-size: 0.72rem; color: #0284C7; margin-top: 0.35rem;">Tap or drop photo</div>
+                </div>
+
+                <div class="photo-slot-card">
+                  <input type="file" accept="image/*" class="slot-file-input" style="display: none;" />
+                  <img class="slot-preview-img" alt="Slot 4 Preview" />
+                  <div class="slot-icon-placeholder" style="font-size: 1.8rem;">📋</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;">4. Insurance Paperwork (Opt)</div>
+                  <div class="mono slot-status-tag" style="font-size: 0.72rem; color: #0284C7; margin-top: 0.35rem;">Tap or drop photo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Deductible Relief Calculator ($250 / $500 / $1,000 / $1,500) -->
+          <div class="card-light">
+            <div>
+              <h2 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;">
+                Interactive Insurance Deductible Relief Calculator
+              </h2>
+
+              <div class="grid-2" style="gap: 0.85rem; margin-bottom: 1rem;">
+                <div>
+                  <label style="font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">Insurance Company</label>
+                  <select id="insCarrierSelect" class="light-select">
+                    <option value="State Farm">State Farm</option>
+                    <option value="GEICO">GEICO</option>
+                    <option value="Progressive">Progressive</option>
+                    <option value="Allstate">Allstate</option>
+                    <option value="AAA">AAA Insurance</option>
+                    <option value="Farmers">Farmers Insurance</option>
+                    <option value="Liberty Mutual">Liberty Mutual</option>
+                    <option value="Self-Pay (Direct Cash Discount)">Self-Pay (Cash Rate)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 0.3rem;">Estimated Repair Tier</label>
+                  <select id="damageScopeSelect" class="light-select">
+                    <option value="minor">Minor Bumper / Single Panel ($900–$1,800)</option>
+                    <option value="moderate" selected>Multi-Panel / Quarter Panel ($2,200–$4,500)</option>
+                    <option value="major">Major Collision / Frame &amp; Paint ($5,000+)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Deductible Slider ($250 / $500 / $1,000 / $1,500) -->
+              <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <label style="font-size: 0.82rem; font-weight: 700;">Drag Your Policy Deductible ($250 – $1,500)</label>
+                  <span id="dedSliderReadout" class="mono" style="font-weight: 800; color: #D97706;">$500 Policy Deductible</span>
+                </div>
+                <input
+                  type="range"
+                  id="deductibleRangeSlider"
+                  min="250"
+                  max="1500"
+                  step="250"
+                  value="500"
+                  style="width: 100%; accent-color: #F59E0B; cursor: pointer;"
+                />
+                <div class="mono" style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #64748B; margin-top: 0.25rem;">
+                  <span>$250</span>
+                  <span>$500</span>
+                  <span>$750</span>
+                  <span>$1,000</span>
+                  <span>$1,250</span>
+                  <span>$1,500</span>
+                </div>
+              </div>
+
+              <!-- Savings Output Box -->
+              <div style="background: #0B0F19; color: #FFFFFF; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; border: 1px solid rgba(245,158,11,0.45);">
+                <div style="display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                  <span>Your Policy Deductible:</span>
+                  <span id="calcStdDed" class="mono">$500.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #34D399; font-weight: 700;">
+                  <span>Tyler Express Deductible Assistance:</span>
+                  <span id="calcRelCredit" class="mono">- Up to $350.00 Covered</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-top: 0.55rem; color: #FBBF24; font-weight: 800; font-size: 1.02rem;">
+                  <span>Estimated Out-of-Pocket:</span>
+                  <span id="calcOutPocket" class="mono">$150.00</span>
+                </div>
+              </div>
+
+              <form id="photoEstimateForm" style="display: grid; gap: 0.75rem;">
+                <div class="grid-2" style="gap: 0.75rem;">
+                  <input type="text" id="photoEstName" class="light-input" placeholder="Your Full Name" required />
+                  <input type="tel" id="photoEstPhone" class="light-input" placeholder="Your Mobile Phone (For SMS Quote)" required />
+                </div>
+                <button type="submit" class="btn btn-collision-amber" style="width: 100%; padding: 0.9rem;">
+                  Generate Priority Collision Ticket &amp; Alert Hector →
+                </button>
+              </form>
+
+              <div id="collisionTicketOutput" style="display: none; background: rgba(16,185,129,0.12); border: 2px solid #10B981; border-radius: 12px; padding: 1.15rem; margin-top: 1rem;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="globalFooterMount"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

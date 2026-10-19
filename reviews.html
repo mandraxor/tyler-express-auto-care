@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verified 5.0★ CARFAX Review Wall &amp; VIP Review Flow | Tyler Express Auto Care</title>
+  <meta name="description" content="Read 100% 5-Star Verified CARFAX Service Reviews for Tyler Express Auto Care in Las Vegas—covering Toyota, Lexus, Honda, Acura, Hyundai, Kia, and Trucks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="reviews">
+  <div id="globalHeaderMount"></div>
+
+  <main>
+    <section class="section-light">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow-tag eyebrow-emerald">100% 5-STAR VERIFIED REPUTATION • /reviews</span>
+          <h1 class="section-title">5.0 ★ Out of 5.0 Verified CARFAX Review Wall</h1>
+          <p class="section-subtitle">
+            Filter real verbatim CARFAX reviews by vehicle make or service type, or leave a 1-tap 5-star review for Kenny (Twain Ave) or Hector (Sirius Ave).
+          </p>
+        </div>
+
+        <!-- Scorecard Header -->
+        <div style="background: #0B0F19; color: #FFFFFF; border: 2px solid #10B981; border-radius: 18px; padding: 1.85rem 2.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
+          <div style="display: flex; align-items: center; gap: 1.25rem;">
+            <div style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: #34D399; line-height: 1;">5.0★</div>
+            <div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;">
+                5.0 / 5.0 Overall Rating (100% 5-Star Verified Reviews on CARFAX)
+              </div>
+              <div class="mono" style="font-size: 0.78rem; color: #94A3B8;">
+                3915 W TWAIN AVE (MECHANICAL) &amp; 3070 W SIRIUS AVE UNIT 108 (COLLISION)
+              </div>
+            </div>
+          </div>
+          <button type="button" id="openVipReviewModalBtn" class="btn btn-emerald">
+            ★ Leave a 5-Star Review (1-Tap Fast-Track)
+          </button>
+        </div>
+
+        <!-- Make-Specific Filter Pills -->
+        <div id="reviewFilterTabs" class="catalog-tabs">
+          <button type="button" class="cat-tab-btn active" data-rev-filter="all">All Reviews (7)</button>
+          <button type="button" class="cat-tab-btn" data-rev-filter="toyota-lexus">Toyota &amp; Lexus</button>
+          <button type="button" class="cat-tab-btn" data-rev-filter="honda-acura">Honda &amp; Acura</button>
+          <button type="button" class="cat-tab-btn" data-rev-filter="hyundai-kia">Hyundai &amp; Kia</button>
+          <button type="button" class="cat-tab-btn" data-rev-filter="trucks-domestic">Trucks &amp; Domestic</button>
+          <button type="button" class="cat-tab-btn" data-rev-filter="collision">Collision &amp; Deductible Help</button>
+        </div>
+
+        <!-- Verified Customer Cards -->
+        <div id="reviewsWallGrid" class="grid-3"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 1-Tap Leave a 5-Star Review Fast-Track Modal -->
+  <div id="vipReviewModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button type="button" id="closeVipReviewModalBtn" class="modal-close">✕</button>
+      <span class="eyebrow-tag eyebrow-emerald">VIP CUSTOMER REVIEW FAST-TRACK</span>
+      <h2 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; margin-bottom: 0.65rem;">
+        Select Which Las Vegas Facility Served You Today:
+      </h2>
+      <p style="font-size: 0.9rem; color: #CBD5E1; margin-bottom: 1.25rem;">
+        Your 5-star review helps local Las Vegas drivers find honest mechanical and collision care with zero shortcuts.
+      </p>
+      <div style="display: grid; gap: 0.85rem;">
+        <a href="https://www.google.com/maps/search/?api=1&query=3915+W+Twain+Ave+Las+Vegas+NV+89103" target="_blank" rel="noopener" class="btn btn-primary-blue">
+          🔧 Review Twain Ave Mechanical Hub (Trung "Kenny" Chau) →
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=3070+W+Sirius+Ave+Unit+108+Las+Vegas+NV+89102" target="_blank" rel="noopener" class="btn btn-collision-amber">
+          💥 Review Sirius Ave Collision Center (Hector Montes) →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="globalFooterMount"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

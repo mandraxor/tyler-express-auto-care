@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Diagnostic Advisor &amp; OBD-II Terminal | Tyler Express Auto Care</title>
+  <meta name="description" content="Interactive Virtual Diagnostic Advisor and OBD-II Trouble Code Decoder for Las Vegas drivers. Unlock a $25 Priority Diagnostic Voucher (TYLER-VIP-25)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="diagnostics">
+  <div id="globalHeaderMount"></div>
+
+  <main>
+    <section class="section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow-tag eyebrow-blue">INTERACTIVE SHOP TELEMETRY • /diagnostic-estimator</span>
+          <h1 class="section-title">Virtual Diagnostic Advisor &amp; OBD-II Symptom Terminal</h1>
+          <p class="section-subtitle">
+            Select your vehicle profile and symptom—or enter an OBD-II code—for a real-time drivability urgency rating, Las Vegas heat impact analysis, Master Tech advice from Kenny &amp; Hector, and a $25 Priority Diagnostic Voucher.
+          </p>
+        </div>
+
+        <div class="terminal-body">
+          <!-- Left Column: Vehicle Selector & Symptom / OBD-II Inputs -->
+          <div>
+            <div class="diag-step-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                <h2 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 800;">1. Select Vehicle Profile</h2>
+                <span class="mono" style="font-size: 0.73rem; color: #38BDF8;">1-Tap Brand Select:</span>
+              </div>
+
+              <div id="diagMakePills" style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem;">
+                <button type="button" class="brand-pill-btn active" data-make="Toyota">Toyota</button>
+                <button type="button" class="brand-pill-btn" data-make="Honda">Honda</button>
+                <button type="button" class="brand-pill-btn" data-make="BMW">BMW</button>
+                <button type="button" class="brand-pill-btn" data-make="Lexus">Lexus</button>
+                <button type="button" class="brand-pill-btn" data-make="Chevrolet">Chevrolet</button>
+                <button type="button" class="brand-pill-btn" data-make="Hyundai">Hyundai</button>
+                <button type="button" class="brand-pill-btn" data-make="Kia">Kia</button>
+                <button type="button" class="brand-pill-btn" data-make="Ford">Ford</button>
+                <button type="button" class="brand-pill-btn" data-make="Acura">Acura</button>
+                <button type="button" class="brand-pill-btn" data-make="Trucks">Trucks</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem;">
+                <div>
+                  <label class="mono" style="font-size: 0.72rem; color: #94A3B8;">Year</label>
+                  <select id="diagYearSelect" class="terminal-select"></select>
+                </div>
+                <div>
+                  <label class="mono" style="font-size: 0.72rem; color: #94A3B8;">Make</label>
+                  <select id="diagMakeSelect" class="terminal-select"></select>
+                </div>
+                <div>
+                  <label class="mono" style="font-size: 0.72rem; color: #94A3B8;">Model</label>
+                  <select id="diagModelSelect" class="terminal-select"></select>
+                </div>
+                <div>
+                  <label class="mono" style="font-size: 0.72rem; color: #94A3B8;">Mileage</label>
+                  <select id="diagMileageSelect" class="terminal-select">
+                    <option value="Under 30,000 mi">Under 30,000 mi</option>
+                    <option value="30,000 – 60,000 mi">30,000 – 60,000 mi</option>
+                    <option value="60,000 – 95,000 mi" selected>60,000 – 95,000 mi</option>
+                    <option value="95,000 – 140,000 mi">95,000 – 140,000 mi</option>
+                    <option value="140,000+ mi">140,000+ mi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="diag-step-box" style="margin-bottom: 0;">
+              <h2 style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; margin-bottom: 0.75rem;">
+                2. Select Symptom or Decode OBD-II Trouble Code
+              </h2>
+
+              <div id="symptomCardsGrid" class="symptom-grid"></div>
+
+              <div style="border-top: 1px solid var(--border-dark); padding-top: 1rem;">
+                <div style="display: flex; gap: 0.6rem; margin-bottom: 0.65rem;">
+                  <input
+                    type="text"
+                    id="obdCodeInput"
+                    class="terminal-input mono"
+                    placeholder="Enter OBD-II Code (e.g. P0420, P0300, P0171, P0455, P0128, P0700)..."
+                    style="text-transform: uppercase;"
+                  />
+                  <button type="button" id="obdDecodeBtn" class="btn btn-collision-amber">Decode</button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                  <span class="mono" style="font-size: 0.72rem; color: #94A3B8;">Quick Codes:</span>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0420">P0420</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0300">P0300</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0171">P0171</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0455">P0455</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0128">P0128</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="P0700">P0700</button>
+                  <button type="button" class="brand-pill-btn obd-chip mono" data-obd="C0035">C0035</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Dynamic Diagnostic Output Panel -->
+          <div style="background: #070B14; border: 1px solid rgba(56,189,248,0.35); border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(2,132,199,0.15); padding: 0.5rem 0.85rem; border-radius: 8px; margin-bottom: 1rem;" class="mono">
+                <span id="diagReadoutVehicle" style="font-size: 0.78rem; color: #38BDF8;">2019 Toyota Camry</span>
+                <span id="diagReadoutCode" style="font-size: 0.78rem; color: #FBBF24;">C0035 / BRAKE-HYD</span>
+              </div>
+
+              <!-- Urgency Gauge -->
+              <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-dark); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                <div class="mono" style="font-size: 0.72rem; color: #94A3B8; margin-bottom: 0.4rem;">DRIVABILITY &amp; SAFETY URGENCY GAUGE</div>
+                <div style="height: 10px; background: #1E293B; border-radius: 999px; overflow: hidden; margin-bottom: 0.5rem;">
+                  <div id="diagUrgencyBar" style="height: 100%; width: 76%; background: #F59E0B; transition: all 0.3s ease;"></div>
+                </div>
+                <div id="diagUrgencyText" class="mono" style="font-size: 0.8rem; font-weight: 800; color: #FBBF24;"></div>
+              </div>
+
+              <div id="obdDecodedBanner" style="display: none; background: rgba(245,158,11,0.14); border-left: 3px solid #F59E0B; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem;"></div>
+
+              <div style="margin-bottom: 0.9rem;">
+                <div class="mono" style="font-size: 0.74rem; color: #38BDF8; font-weight: 800; margin-bottom: 0.25rem;">115°F LAS VEGAS DESERT HEAT IMPACT</div>
+                <p id="diagVegasImpactText" style="font-size: 0.86rem; color: #CBD5E1;"></p>
+              </div>
+
+              <div style="margin-bottom: 0.9rem;">
+                <div class="mono" style="font-size: 0.74rem; color: #38BDF8; font-weight: 800; margin-bottom: 0.25rem;">LIKELY COMPONENTS INVOLVED</div>
+                <ul id="diagCulpritsList" style="list-style: none; font-size: 0.85rem; color: #E2E8F0; display: grid; gap: 0.35rem;"></ul>
+              </div>
+
+              <div style="background: rgba(16,185,129,0.1); border-left: 3px solid #10B981; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem;">
+                <p id="diagTechAdviceText" style="font-size: 0.83rem; color: #E2E8F0; font-style: italic;"></p>
+              </div>
+            </div>
+
+            <!-- Printable $25 Priority Diagnostic Voucher -->
+            <div style="background: linear-gradient(135deg, rgba(16,185,129,0.16), rgba(2,132,199,0.16)); border: 1px dashed #10B981; border-radius: 12px; padding: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span class="mono" style="font-size: 0.72rem; color: #34D399; font-weight: 800;">PRIORITY VOUCHER UNLOCKED</span>
+                <span class="mono" style="background: #10B981; color: #042F2E; padding: 0.2rem 0.55rem; border-radius: 5px; font-weight: 900; font-size: 0.78rem;">TYLER-VIP-25</span>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: 0.94rem; margin-bottom: 0.75rem;">
+                $25 OFF Complete OEM Computer Diagnostic or Free Collision Triage
+              </div>
+              <div style="display: grid; gap: 0.5rem;">
+                <a id="sendDiagnosisToBayLink" href="book.html" class="btn btn-emerald">
+                  Pass Vehicle &amp; Diagnosis to Bay Scheduler →
+                </a>
+                <button type="button" id="printVoucherBtn" class="btn btn-outline-dark" style="padding: 0.5rem; font-size: 0.8rem;">
+                  🖨️ Print / Save $25 Priority Voucher
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="globalFooterMount"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

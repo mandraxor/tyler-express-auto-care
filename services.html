@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>25-Service Filterable Catalog &amp; 115°F Desert A/C Shield | Tyler Express Auto Care</title>
+  <meta name="description" content="Explore all 25 mechanical, brake, 115°F desert A/C, transmission, express oil, and collision repair services at Tyler Express Auto Care in Las Vegas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="services">
+  <div id="globalHeaderMount"></div>
+
+  <main>
+    <!-- LAS VEGAS 115°F DESERT CLIMATE A/C & COOLING DEFENSE HERO BANNER -->
+    <section class="hero-section" style="padding: 3rem 0;">
+      <div class="container">
+        <div style="background: linear-gradient(125deg, #0B0F19 0%, #0369A1 55%, #D97706 100%); border-radius: 20px; padding: 2.25rem; border: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+          <div style="max-width: 780px;">
+            <span class="mono" style="font-size: 0.76rem; color: #FBBF24; font-weight: 800;">
+              ☀️ LAS VEGAS 115°F DESERT CLIMATE A/C &amp; COOLING DEFENSE SHIELD
+            </span>
+            <h1 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3.2vw, 2.5rem); font-weight: 800; color: #FFFFFF; margin: 0.35rem 0 0.6rem;">
+              Dual R134a &amp; R1234yf Refrigerant Recovery, UV Leak Detection &amp; High-Heat Battery Testing
+            </h1>
+            <p style="color: #E2E8F0; font-size: 0.96rem;">
+              Don't let Strip traffic overheat your engine or seize your compressor. Our Twain Ave bays verify 38°F–42°F vent output, pressure-test radiators, and load-test desert batteries.
+            </p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+            <a href="book.html?facility=mechanical&service=svc-ac-recharge" class="btn btn-collision-amber">
+              ❄️ Book 115°F Desert A/C Check →
+            </a>
+            <a href="tel:+17029694596" class="btn btn-outline-dark">
+              📞 Call Kenny: (702) 969-4596
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 25-SERVICE FILTERABLE CATALOG -->
+    <section class="section-light">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow-tag eyebrow-blue" style="color: #0369A1;">COMPLETE 25-SERVICE DIRECTORY</span>
+          <h2 class="section-title">Filterable Mechanical &amp; Collision Service Catalog</h2>
+          <p class="section-subtitle">
+            Search any symptom, component, or service below. Every card routes directly to the specialized Las Vegas facility (Twain Ave Mechanical or Sirius Ave Collision).
+          </p>
+        </div>
+
+        <div style="max-width: 640px; margin: 0 auto 1.5rem;">
+          <input
+            type="search"
+            id="serviceSearchInput"
+            class="light-input"
+            style="border-radius: 999px; padding: 0.85rem 1.35rem; border-width: 2px; font-size: 0.96rem;"
+            placeholder="🔍 Search all 25 services (e.g. oil change, brakes, R1234yf, O2 sensor, frame, deductible)..."
+          />
+        </div>
+
+        <div id="serviceCategoryTabs" class="catalog-tabs"></div>
+
+        <div id="servicesCatalogGrid" class="grid-3"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="globalFooterMount"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

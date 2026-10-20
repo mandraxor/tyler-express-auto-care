@@ -80,15 +80,15 @@
               <div id="symptomCardsGrid" class="symptom-grid"></div>
 
               <div style="border-top: 1px solid var(--border-dark); padding-top: 1rem;">
-                <div style="display: flex; gap: 0.6rem; margin-bottom: 0.65rem;">
+                <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.65rem;">
                   <input
                     type="text"
                     id="obdCodeInput"
                     class="terminal-input mono"
-                    placeholder="Enter OBD-II Code (e.g. P0420, P0300, P0171, P0455, P0128, P0700)..."
-                    style="text-transform: uppercase;"
+                    placeholder="Enter OBD-II Code (e.g. P0420, P0300, P0171)..."
+                    style="text-transform: uppercase; flex: 1 1 180px;"
                   />
-                  <button type="button" id="obdDecodeBtn" class="btn btn-collision-amber">Decode</button>
+                  <button type="button" id="obdDecodeBtn" class="btn btn-collision-amber" style="flex: 0 0 auto;">Decode</button>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
                   <span class="mono" style="font-size: 0.72rem; color: #94A3B8;">Quick Codes:</span>

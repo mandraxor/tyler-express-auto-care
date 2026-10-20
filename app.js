@@ -494,14 +494,14 @@
               </div>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; flex-wrap: wrap; gap: 1rem;">
-              <span class="mono" style="font-size: 0.76rem; color: #94A3B8;">
-                ← Drag Metal Divider or Use Left/Right Arrow Keys (0%–100%) →
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; flex-wrap: wrap; gap: 0.65rem;">
+              <span class="mono" style="font-size: 0.74rem; color: #94A3B8;">
+                ← Drag Metal Divider or Use Arrow Keys →
               </span>
-              <div style="display: flex; align-items: center; gap: 0.65rem;">
-                <span class="mono" style="font-size: 0.74rem; color: #FBBF24;">BEFORE</span>
-                <input type="range" id="baRangeSlider" min="2" max="98" value="${state.sliderPct}" style="width: 190px; accent-color: #F59E0B; cursor: pointer;" />
-                <span class="mono" style="font-size: 0.74rem; color: #34D399;">AFTER</span>
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1 1 200px; max-width: 100%;">
+                <span class="mono" style="font-size: 0.72rem; color: #FBBF24; flex-shrink: 0;">BEFORE</span>
+                <input type="range" id="baRangeSlider" min="2" max="98" value="${state.sliderPct}" style="flex: 1; min-width: 90px; width: 100%; accent-color: #F59E0B; cursor: pointer;" />
+                <span class="mono" style="font-size: 0.72rem; color: #34D399; flex-shrink: 0;">AFTER</span>
               </div>
             </div>
           </div>
@@ -549,11 +549,11 @@
               </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1rem;">
-              <a href="photo-estimate.html" class="btn btn-collision-amber" style="font-size: 0.8rem; padding: 0.65rem;">
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1rem;">
+              <a href="photo-estimate.html" class="btn btn-collision-amber" style="font-size: 0.78rem; padding: 0.6rem 0.45rem;">
                 📸 60-Sec Photo Quote
               </a>
-              <a href="book.html?facility=collision&service=svc-collision-recon" class="btn btn-outline-dark" style="font-size: 0.8rem; padding: 0.65rem;">
+              <a href="book.html?facility=collision&service=svc-collision-recon" class="btn btn-outline-dark" style="font-size: 0.78rem; padding: 0.6rem 0.45rem;">
                 📅 Book Collision Bay
               </a>
             </div>

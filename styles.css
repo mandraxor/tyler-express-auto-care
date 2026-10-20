@@ -1,6 +1,7 @@
 /* ==========================================================================
    TYLER EXPRESS AUTO CARE — 8-PAGE ARCHITECTURE & PHOTOREALISTIC STUDIO CSS
    Theme Polarity: Intentional Dark (#0B0F19) & Crisp Daylight (#F8FAFC) Hybrid
+   Mobile-First & Touch-Ergonomic Optimization (iOS Safari / Android Chrome)
    ========================================================================== */
 
 :root {
@@ -44,6 +45,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -83,7 +85,7 @@ main {
   font-size: 0.81rem;
   padding: 0.52rem 0;
   position: relative;
-  z-index: 70;
+  z-index: 75;
 }
 
 .utility-bar-inner {
@@ -130,6 +132,7 @@ main {
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 8px currentColor;
+  flex-shrink: 0;
   animation: statusPulse 1.8s infinite ease-in-out;
 }
 
@@ -214,10 +217,11 @@ main {
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 0.74rem;
-  padding: 0.25rem 0.62rem;
+  padding: 0.28rem 0.65rem;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .lang-btn:hover {
@@ -247,16 +251,17 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  font-size: 0.87rem;
+  font-size: 0.85rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .lang-routing-cta {
   background: #FFFFFF;
   color: #0F172A;
-  padding: 0.24rem 0.82rem;
+  padding: 0.26rem 0.85rem;
   border-radius: 999px;
   font-weight: 800;
   font-size: 0.78rem;
@@ -264,7 +269,7 @@ main {
 }
 
 /* ==========================================================================
-   MAIN 8-PAGE GLOBAL NAVIGATION HEADER
+   MAIN 8-PAGE GLOBAL NAVIGATION HEADER + MOBILE DRAWER & SWIPE STRIP
    ========================================================================== */
 .site-header {
   background: rgba(11, 15, 25, 0.96);
@@ -272,29 +277,29 @@ main {
   border-bottom: 1px solid var(--border-dark);
   position: sticky;
   top: 0;
-  z-index: 65;
+  z-index: 70;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.8rem 0;
+  padding: 0.75rem 0;
   gap: 0.85rem;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.65rem;
   text-decoration: none;
   color: #FFFFFF;
   flex-shrink: 0;
 }
 
 .brand-emblem {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   background: linear-gradient(135deg, var(--primary-blue) 0%, #0369A1 55%, var(--collision-amber) 100%);
   display: flex;
@@ -302,23 +307,24 @@ main {
   justify-content: center;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  flex-shrink: 0;
 }
 
 .brand-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.08rem;
+  font-size: 1.04rem;
   letter-spacing: -0.03em;
   line-height: 1.1;
   display: block;
 }
 
 .brand-sub {
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   color: var(--text-muted-dark);
   font-family: var(--font-mono);
   letter-spacing: 0.04em;
@@ -362,8 +368,110 @@ main {
   border: 1px solid rgba(245, 158, 11, 0.45);
 }
 
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Horizontal Touch-Swipeable Page Pill Bar for Mobile & Tablet (<1080px) */
+.mobile-swipe-nav {
+  display: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: #070B14;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 0.45rem 1rem;
+  gap: 0.4rem;
+}
+
+.mobile-swipe-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-swipe-nav .nav-link {
+  font-size: 0.76rem;
+  padding: 0.36rem 0.72rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.mobile-swipe-nav .nav-link.active {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue-bright);
+  color: #FFFFFF;
+}
+
+.mobile-swipe-nav .nav-link.active-amber {
+  background: var(--collision-amber);
+  border-color: var(--collision-amber-bright);
+  color: #0B0F19;
+  font-weight: 800;
+}
+
+/* Full Mobile Slide-Down Drawer */
+.mobile-nav-drawer {
+  display: none;
+  background: #0B0F19;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 2px solid var(--primary-blue);
+  padding: 1.15rem 1.25rem 1.4rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75);
+}
+
+.mobile-nav-drawer.open {
+  display: block;
+}
+
+.mobile-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.mobile-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.85rem;
+  background: #111827;
+  border: 1px solid var(--border-dark);
+  border-radius: 10px;
+  color: #F8FAFC;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.mobile-drawer-link.active {
+  border-color: var(--primary-blue-bright);
+  background: rgba(2, 132, 199, 0.22);
+}
+
 /* ==========================================================================
-   BUTTON SYSTEM
+   BUTTON SYSTEM (TOUCH ERGONOMIC 44px+ TARGETS)
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -373,13 +481,16 @@ main {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9rem;
-  padding: 0.72rem 1.25rem;
+  padding: 0.75rem 1.25rem;
+  min-height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease;
-  line-height: 1.2;
+  line-height: 1.25;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary-blue {
@@ -467,6 +578,7 @@ main {
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .case-tab-btn:hover {
@@ -492,10 +604,11 @@ main {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 360px;
+  min-height: 340px;
   border-radius: 14px;
   overflow: hidden;
   user-select: none;
+  -webkit-user-select: none;
   touch-action: pan-y;
   border: 2px solid rgba(255, 255, 255, 0.16);
   cursor: ew-resize;
@@ -529,26 +642,30 @@ main {
 
 .ba-corner-label {
   position: absolute;
-  top: 14px;
-  padding: 0.38rem 0.8rem;
+  top: 12px;
+  padding: 0.34rem 0.72rem;
   border-radius: 8px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   z-index: 6;
   pointer-events: none;
   backdrop-filter: blur(8px);
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ba-label-before {
-  left: 14px;
+  left: 12px;
   background: rgba(239, 68, 68, 0.9);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .ba-label-after {
-  right: 14px;
+  right: 12px;
   background: rgba(16, 185, 129, 0.92);
   color: #042F2E;
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -597,15 +714,15 @@ main {
 .hotspot-pin {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(239, 68, 68, 0.95);
   color: #FFFFFF;
   border: 2px solid #FFFFFF;
   font-family: var(--font-mono);
   font-weight: 800;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -614,6 +731,7 @@ main {
   box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
   animation: hotspotPulse 2s infinite;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hotspot-pin:hover,
@@ -684,14 +802,14 @@ main {
     radial-gradient(circle at 82% 24%, rgba(245, 158, 11, 0.2) 0%, transparent 45%),
     linear-gradient(180deg, var(--bg-obsidian) 0%, var(--bg-slate) 100%);
   color: var(--text-on-dark);
-  padding: 3.5rem 0 4rem;
+  padding: 3.25rem 0 3.75rem;
   border-bottom: 1px solid var(--border-dark);
 }
 
 .hero-top-center {
   text-align: center;
   max-width: 980px;
-  margin: 0 auto 2.25rem;
+  margin: 0 auto 2rem;
 }
 
 .carfax-hero-pill {
@@ -701,26 +819,26 @@ main {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.45);
   color: #6EE7B7;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 0.95rem;
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(1.75rem, 4vw, 3.25rem);
   letter-spacing: -0.035em;
-  line-height: 1.12;
+  line-height: 1.14;
   color: #FFFFFF;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.85rem;
 }
 
 .hero-promise {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   color: #CBD5E1;
   max-width: 780px;
   margin: 0 auto;
@@ -730,22 +848,18 @@ main {
 .dual-facility-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
 }
 
 .facility-portal-card {
   background: rgba(17, 24, 39, 0.9);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 1.85rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.25s ease;
-}
-
-.facility-portal-card:hover {
-  transform: translateY(-3px);
 }
 
 .facility-portal-card.mech-portal {
@@ -760,13 +874,13 @@ main {
 
 .portal-tag {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   padding: 0.26rem 0.65rem;
   border-radius: 6px;
   display: inline-block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.7rem;
 }
 
 .mech-portal .portal-tag {
@@ -781,31 +895,31 @@ main {
 
 .portal-title {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: clamp(1.32rem, 2.2vw, 1.6rem);
   font-weight: 800;
   color: #FFFFFF;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .portal-bullets {
   list-style: none;
   display: grid;
-  gap: 0.6rem;
-  margin: 1.15rem 0 1.65rem;
+  gap: 0.55rem;
+  margin: 1rem 0 1.45rem;
 }
 
 .portal-bullets li {
   display: flex;
   align-items: flex-start;
-  gap: 0.55rem;
-  font-size: 0.92rem;
+  gap: 0.5rem;
+  font-size: 0.9rem;
   color: #E2E8F0;
 }
 
 .portal-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 /* ==========================================================================
@@ -814,40 +928,40 @@ main {
 .section-dark {
   background: var(--bg-obsidian);
   color: var(--text-on-dark);
-  padding: 4rem 0;
+  padding: 3.75rem 0;
   border-bottom: 1px solid var(--border-dark);
 }
 
 .section-light {
   background: var(--surface-light);
   color: var(--text-dark);
-  padding: 4rem 0;
+  padding: 3.75rem 0;
   border-bottom: 1px solid var(--border-light);
 }
 
 .section-white {
   background: var(--surface-white);
   color: var(--text-dark);
-  padding: 4rem 0;
+  padding: 3.75rem 0;
   border-bottom: 1px solid var(--border-light);
 }
 
 .section-header {
   max-width: 840px;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 2.25rem;
   text-align: center;
 }
 
 .eyebrow-tag {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  padding: 0.28rem 0.75rem;
+  padding: 0.28rem 0.72rem;
   border-radius: 6px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .eyebrow-blue {
@@ -874,15 +988,15 @@ main {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin-bottom: 0.7rem;
+  line-height: 1.16;
+  margin-bottom: 0.65rem;
 }
 
 .section-subtitle {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--text-muted-light);
 }
 
@@ -894,20 +1008,26 @@ main {
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.35rem;
+  gap: 1.25rem;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1.4rem;
+}
+
+.vehicle-select-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
 }
 
 .card-light {
   background: #FFFFFF;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 1.4rem;
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
@@ -918,7 +1038,7 @@ main {
   background: #111827;
   border: 1px solid var(--border-dark);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 1.4rem;
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -930,23 +1050,24 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.65rem;
 }
 
 .cat-tab-btn {
   border: 1px solid #CBD5E1;
   background: #FFFFFF;
   color: var(--text-dark);
-  padding: 0.52rem 1rem;
+  padding: 0.52rem 0.95rem;
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   transition: all 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cat-tab-btn.active {
@@ -968,18 +1089,18 @@ main {
   background: var(--bg-slate);
   border: 1px solid rgba(56, 189, 248, 0.32);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 1.75rem;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 2rem;
+  gap: 1.75rem;
 }
 
 .diag-step-box {
   background: rgba(11, 15, 25, 0.7);
   border: 1px solid var(--border-dark);
   border-radius: var(--radius-md);
-  padding: 1.35rem;
-  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  margin-bottom: 1.2rem;
 }
 
 .terminal-select,
@@ -988,9 +1109,10 @@ main {
   color: #FFFFFF;
   border: 1px solid rgba(148, 163, 184, 0.32);
   border-radius: 8px;
-  padding: 0.62rem 0.78rem;
+  padding: 0.65rem 0.78rem;
+  min-height: 44px;
   font-family: var(--font-sans);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   width: 100%;
 }
 
@@ -998,10 +1120,11 @@ main {
 .light-select {
   width: 100%;
   padding: 0.68rem 0.85rem;
+  min-height: 44px;
   border: 1px solid #CBD5E1;
   border-radius: 8px;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   background: #FFFFFF;
   color: var(--text-dark);
 }
@@ -1009,7 +1132,7 @@ main {
 .symptom-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.65rem;
+  gap: 0.6rem;
   margin-bottom: 1.1rem;
 }
 
@@ -1018,13 +1141,15 @@ main {
   border: 1px solid var(--border-dark);
   border-radius: 10px;
   padding: 0.75rem 0.85rem;
+  min-height: 52px;
   color: #E2E8F0;
   text-align: left;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   transition: all 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .symptom-card-btn.active {
@@ -1039,9 +1164,10 @@ main {
   color: #CBD5E1;
   font-size: 0.76rem;
   font-weight: 700;
-  padding: 0.32rem 0.7rem;
+  padding: 0.38rem 0.72rem;
   border-radius: 6px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .brand-pill-btn.active,
@@ -1055,23 +1181,24 @@ main {
 .photo-slots-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .photo-slot-card {
   border: 2px dashed #CBD5E1;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0.9rem;
   text-align: center;
   background: #F8FAFC;
   cursor: pointer;
-  min-height: 185px;
+  min-height: 175px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .photo-slot-card.has-image {
@@ -1083,10 +1210,10 @@ main {
 
 .slot-preview-img {
   width: 100%;
-  height: 118px;
+  height: 110px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   display: none;
 }
 
@@ -1109,11 +1236,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.62rem 0.9rem;
+  gap: 0.5rem;
+  padding: 0.62rem 0.85rem;
   border-radius: 8px;
   background: #F8FAFC;
   border: 1px solid var(--border-light);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }
 
 .hours-row.is-today {
@@ -1126,11 +1254,11 @@ main {
   background: var(--carfax-emerald);
   color: #042F2E;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 800;
-  padding: 0.14rem 0.5rem;
+  padding: 0.14rem 0.48rem;
   border-radius: 999px;
-  margin-left: 0.45rem;
+  margin-left: 0.35rem;
 }
 
 /* Modals */
@@ -1142,7 +1270,7 @@ main {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 1rem;
   z-index: 100;
 }
 
@@ -1157,19 +1285,21 @@ main {
   border-radius: 18px;
   max-width: 640px;
   width: 100%;
-  padding: 2rem;
+  padding: 1.65rem;
   position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.85rem;
+  right: 0.85rem;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: #FFFFFF;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -1178,9 +1308,9 @@ main {
 .site-footer {
   background: #050811;
   color: #94A3B8;
-  padding: 3.5rem 0 5.5rem;
+  padding: 3.25rem 0 6.5rem;
   border-top: 1px solid var(--border-dark);
-  font-size: 0.86rem;
+  font-size: 0.85rem;
 }
 
 .footer-grid {
@@ -1193,7 +1323,7 @@ main {
 .footer-links {
   list-style: none;
   display: grid;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .footer-links a {
@@ -1211,12 +1341,14 @@ main {
   left: 0;
   right: 0;
   background: rgba(11, 15, 25, 0.98);
-  border-top: 1px solid rgba(148, 163, 184, 0.3);
-  padding: 0.55rem 0.65rem;
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(148, 163, 184, 0.32);
+  padding: 0.5rem 0.6rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
   display: none;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.45rem;
-  z-index: 90;
+  gap: 0.42rem;
+  z-index: 95;
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.65);
 }
 
 .mobile-thumb-btn {
@@ -1224,20 +1356,35 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.52rem 0.35rem;
+  padding: 0.5rem 0.3rem;
+  min-height: 46px;
   border-radius: 8px;
   text-decoration: none;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   text-align: center;
+  line-height: 1.18;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-thumb-btn.mech { background: var(--primary-blue); color: #FFFFFF; }
 .mobile-thumb-btn.col { background: var(--collision-amber); color: #0B0F19; }
 .mobile-thumb-btn.book { background: var(--carfax-emerald); color: #042F2E; }
 
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (TABLET & SMARTPHONE ERGONOMICS)
+   ========================================================================== */
 @media (max-width: 1080px) {
+  .main-nav {
+    display: none;
+  }
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+  .mobile-swipe-nav {
+    display: flex;
+  }
   .dual-facility-grid,
   .ba-studio-grid,
   .terminal-body,
@@ -1251,13 +1398,176 @@ main {
 }
 
 @media (max-width: 767px) {
+  .container {
+    padding: 0 0.95rem;
+  }
+
+  /* Compact single-row utility bar on mobile */
+  .utility-bar {
+    padding: 0.42rem 0;
+  }
+  .utility-phones,
+  .vegas-clock-badge,
+  .night-drop-inline-link {
+    display: none;
+  }
+  .status-pill {
+    font-size: 0.7rem;
+    padding: 0.22rem 0.6rem;
+    max-width: 58vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Compact header for thumb reach */
+  .header-inner {
+    padding: 0.6rem 0;
+  }
+  .brand-emblem {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+  .brand-title {
+    font-size: 0.92rem;
+  }
+  .brand-sub {
+    font-size: 0.58rem;
+  }
+  .header-book-btn {
+    padding: 0.48rem 0.75rem !important;
+    font-size: 0.76rem !important;
+    min-height: 38px;
+  }
+
+  /* Sticky Mobile Bottom Action Bar */
   .sticky-mobile-bar {
     display: grid;
   }
-  .grid-3,
-  .symptom-grid,
-  .photo-slots-grid,
+
+  /* Hero & Portal Cards on Mobile */
+  .hero-section {
+    padding: 2rem 0 2.5rem;
+  }
+  .carfax-hero-pill {
+    font-size: 0.68rem;
+    padding: 0.34rem 0.75rem;
+  }
+  .facility-portal-card {
+    padding: 1.35rem;
+  }
   .portal-actions {
     grid-template-columns: 1fr;
+  }
+
+  /* Photorealistic Before & After Slider on Mobile */
+  .ba-studio-wrapper {
+    padding: 0.95rem;
+    border-radius: 14px;
+  }
+  .case-study-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  .case-study-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .case-tab-btn {
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    padding: 0.52rem 0.95rem;
+  }
+  .ba-viewport {
+    min-height: 215px;
+    aspect-ratio: 16 / 10;
+    border-radius: 10px;
+  }
+  .ba-corner-label {
+    top: 8px;
+    font-size: 0.62rem;
+    padding: 0.24rem 0.5rem;
+  }
+  .ba-label-before { left: 8px; }
+  .ba-label-after { right: 8px; }
+  .ba-handle-knob {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  .hotspot-pin {
+    width: 30px;
+    height: 30px;
+    font-size: 0.76rem;
+  }
+  .ba-hud-panel {
+    padding: 1.05rem;
+  }
+
+  /* Category Filter Pills Horizontal Swipe on Mobile */
+  .catalog-tabs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.35rem;
+  }
+  .catalog-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-tab-btn {
+    flex-shrink: 0;
+  }
+
+  /* Grids & Forms on Mobile */
+  .grid-3,
+  .symptom-grid {
+    grid-template-columns: 1fr;
+  }
+  .vehicle-select-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .photo-slots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+  .photo-slot-card {
+    min-height: 145px;
+    padding: 0.65rem;
+  }
+  .slot-preview-img {
+    height: 82px;
+  }
+  .terminal-body {
+    padding: 1.1rem;
+    gap: 1.25rem;
+  }
+  .diag-step-box {
+    padding: 1rem;
+  }
+
+  /* Prevent iOS Safari 16px Input Auto-Zoom */
+  .terminal-select,
+  .terminal-input,
+  .light-input,
+  .light-select {
+    font-size: 16px !important;
+  }
+
+  .section-dark,
+  .section-light,
+  .section-white {
+    padding: 2.65rem 0;
+  }
+  .hours-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
   }
 }

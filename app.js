@@ -124,9 +124,72 @@
               <a href="reviews.html" class="nav-link ${currentPage === "reviews" ? "active" : ""}" data-i18n="nav.reviews">5.0★ Reviews</a>
             </nav>
 
-            <div>
-              <a href="book.html" class="btn btn-primary-blue" style="padding: 0.58rem 1.05rem; font-size: 0.84rem;" data-i18n="nav.book">
+            <div class="header-right-actions">
+              <a href="book.html" class="btn btn-primary-blue header-book-btn" style="padding: 0.58rem 1.05rem; font-size: 0.84rem;" data-i18n="nav.book">
                 Book Bay
+              </a>
+              <button type="button" id="mobileMenuToggleBtn" class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobileNavDrawer" aria-label="Toggle 8-Page Navigation Menu">
+                <span id="mobileMenuIcon">☰</span>
+                <span>Menu</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Horizontal Touch-Swipeable 8-Page Quick Pill Bar (Mobile & Tablet) -->
+          <nav class="mobile-swipe-nav" aria-label="Mobile Quick Page Switcher">
+            <a href="index.html" class="nav-link ${currentPage === "home" ? "active" : ""}" data-i18n="nav.home">Home</a>
+            <a href="mechanical.html" class="nav-link ${currentPage === "mechanical" ? "active" : ""}" data-i18n="nav.mechanical">Mechanical Hub</a>
+            <a href="collision.html" class="nav-link ${currentPage === "collision" ? "active-amber" : ""}" data-i18n="nav.collision">Collision &amp; Body</a>
+            <a href="services.html" class="nav-link ${currentPage === "services" ? "active" : ""}" data-i18n="nav.services">All 25 Services</a>
+            <a href="diagnostic-estimator.html" class="nav-link ${currentPage === "diagnostics" ? "active" : ""}" data-i18n="nav.diagnostics">Symptom Checker</a>
+            <a href="photo-estimate.html" class="nav-link ${currentPage === "photo-estimate" ? "active-amber" : ""}" data-i18n="nav.photoEstimate">Photo Estimate</a>
+            <a href="reviews.html" class="nav-link ${currentPage === "reviews" ? "active" : ""}" data-i18n="nav.reviews">5.0★ Reviews</a>
+            <a href="book.html" class="nav-link ${currentPage === "book" ? "active" : ""}" data-i18n="nav.book">Book Bay</a>
+          </nav>
+
+          <!-- Full Slide-Down 8-Page Mobile Navigation Drawer -->
+          <div id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile 8-Page Directory">
+            <div class="mono" style="font-size: 0.72rem; color: #94A3B8; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">
+              8-Page Interactive Platform Directory
+            </div>
+            <div class="mobile-drawer-grid">
+              <a href="index.html" class="mobile-drawer-link ${currentPage === "home" ? "active" : ""}">
+                <span>🏠</span> <span data-i18n="nav.home">Home</span>
+              </a>
+              <a href="mechanical.html" class="mobile-drawer-link ${currentPage === "mechanical" ? "active" : ""}">
+                <span>🔧</span> <span data-i18n="nav.mechanical">Mechanical Hub</span>
+              </a>
+              <a href="collision.html" class="mobile-drawer-link ${currentPage === "collision" ? "active-amber" : ""}">
+                <span>💥</span> <span data-i18n="nav.collision">Collision &amp; Body</span>
+              </a>
+              <a href="services.html" class="mobile-drawer-link ${currentPage === "services" ? "active" : ""}">
+                <span>📋</span> <span data-i18n="nav.services">All 25 Services</span>
+              </a>
+              <a href="diagnostic-estimator.html" class="mobile-drawer-link ${currentPage === "diagnostics" ? "active" : ""}">
+                <span>💻</span> <span data-i18n="nav.diagnostics">Symptom Checker</span>
+              </a>
+              <a href="photo-estimate.html" class="mobile-drawer-link ${currentPage === "photo-estimate" ? "active-amber" : ""}">
+                <span>📸</span> <span data-i18n="nav.photoEstimate">Photo Estimate</span>
+              </a>
+              <a href="reviews.html" class="mobile-drawer-link ${currentPage === "reviews" ? "active" : ""}">
+                <span>⭐</span> <span data-i18n="nav.reviews">5.0★ Reviews</span>
+              </a>
+              <a href="book.html" class="mobile-drawer-link ${currentPage === "book" ? "active" : ""}">
+                <span>📅</span> <span data-i18n="nav.book">Book Bay</span>
+              </a>
+            </div>
+
+            <div class="mobile-drawer-phones">
+              <a href="tel:+17029694596" class="btn btn-primary-blue" style="width: 100%; justify-content: space-between; padding: 0.7rem 1rem; font-size: 0.84rem;">
+                <span>🔧 Call Kenny (Mechanical — Twain Ave)</span>
+                <span class="mono">(702) 969-4596</span>
+              </a>
+              <a href="tel:+17253663245" class="btn btn-collision-amber" style="width: 100%; justify-content: space-between; padding: 0.7rem 1rem; font-size: 0.84rem;">
+                <span>💥 Call Hector (Collision — Sirius Ave)</span>
+                <span class="mono">(725) 366-3245</span>
+              </a>
+              <a href="book.html#night-drop-guide" class="btn btn-ghost-dark" style="width: 100%; padding: 0.65rem 1rem; font-size: 0.8rem;">
+                🌙 24/7 Early-Bird &amp; Night Key Drop Instructions →
               </a>
             </div>
           </div>
@@ -226,6 +289,41 @@
         applyLanguage(btn.getAttribute("data-lang"));
       });
     });
+
+    // Bind Mobile Hamburger Menu Drawer toggle
+    const mobileMenuToggleBtn = document.getElementById("mobileMenuToggleBtn");
+    const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+    const mobileMenuIcon = document.getElementById("mobileMenuIcon");
+    if (mobileMenuToggleBtn && mobileNavDrawer) {
+      mobileMenuToggleBtn.addEventListener("click", () => {
+        const isOpen = mobileNavDrawer.classList.toggle("open");
+        mobileMenuToggleBtn.setAttribute("aria-expanded", String(isOpen));
+        if (mobileMenuIcon) {
+          mobileMenuIcon.textContent = isOpen ? "✕" : "☰";
+        }
+      });
+
+      // Close drawer when tapping outside
+      document.addEventListener("click", (e) => {
+        if (
+          mobileNavDrawer.classList.contains("open") &&
+          !mobileNavDrawer.contains(e.target) &&
+          !mobileMenuToggleBtn.contains(e.target)
+        ) {
+          mobileNavDrawer.classList.remove("open");
+          mobileMenuToggleBtn.setAttribute("aria-expanded", "false");
+          if (mobileMenuIcon) mobileMenuIcon.textContent = "☰";
+        }
+      });
+    }
+
+    // Auto-scroll active page pill into horizontal view on mobile swipe nav
+    const activeSwipePill = document.querySelector(".mobile-swipe-nav .nav-link.active, .mobile-swipe-nav .nav-link.active-amber");
+    if (activeSwipePill && typeof activeSwipePill.scrollIntoView === "function") {
+      setTimeout(() => {
+        activeSwipePill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }, 60);
+    }
   }
 
   function applyLanguage(lang) {

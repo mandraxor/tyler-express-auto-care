@@ -789,22 +789,21 @@ main {
 .hotspot-pin {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 34px;
-  height: 34px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: rgba(239, 68, 68, 0.95);
+  background: rgba(239, 68, 68, 0.78);
   color: #FFFFFF;
-  border: 2px solid #FFFFFF;
+  border: 1.5px solid #FFFFFF;
   font-family: var(--font-mono);
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.68rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   pointer-events: auto;
-  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-  animation: hotspotPulse 2s infinite;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease, background-color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
 }
@@ -813,8 +812,35 @@ main {
 .hotspot-pin.active {
   background: var(--collision-amber);
   color: #0B0F19;
-  transform: translate(-50%, -50%) scale(1.22);
+  transform: translate(-50%, -50%) scale(1.15);
   z-index: 10;
+}
+
+.hud-pin-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hud-pin-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #F8FAFC;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 0.28rem 0.58rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hud-pin-btn.active,
+.hud-pin-btn:hover {
+  background: var(--collision-amber);
+  border-color: var(--collision-amber);
+  color: #0B0F19;
 }
 
 @keyframes hotspotPulse {
@@ -1623,14 +1649,14 @@ main {
   .ba-label-before { left: 8px; }
   .ba-label-after { right: 8px; }
   .ba-handle-knob {
-    width: 40px;
-    height: 40px;
-    font-size: 0.9rem;
+    width: 28px;
+    height: 28px;
+    top: 84%;
+    font-size: 0.72rem;
+    border-width: 2px;
   }
-  .hotspot-pin {
-    width: 30px;
-    height: 30px;
-    font-size: 0.76rem;
+  .ba-hotspots-layer {
+    display: none !important;
   }
   .ba-hud-panel {
     padding: 1rem;

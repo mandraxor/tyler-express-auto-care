@@ -521,8 +521,25 @@
                 ${cs.summary[state.lang]}
               </p>
 
-              <div class="mono" style="font-size: 0.72rem; color: #FBBF24;">
-                ${t("slider.hotspotPrompt")}
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.35rem;">
+                <div class="mono" style="font-size: 0.72rem; color: #FBBF24;">
+                  ${t("slider.hotspotPrompt")}
+                </div>
+                <div class="hud-pin-selector">
+                  ${cs.hotspots
+                    .map(
+                      (pin, pIdx) => `
+                      <button
+                        type="button"
+                        class="hud-pin-btn ${pIdx === state.activeHotspotIndex ? "active" : ""}"
+                        data-pin-idx="${pIdx}"
+                      >
+                        #${pin.id}
+                      </button>
+                    `
+                    )
+                    .join("")}
+                </div>
               </div>
 
               <div class="hud-hotspot-card" id="hudActivePinCard">
@@ -607,14 +624,17 @@
       });
     });
 
-    // Bind Hotspot Pin clicks & hovers
-    mount.querySelectorAll(".hotspot-pin").forEach((pinBtn) => {
+    // Bind Hotspot Pin clicks & hovers (both photo pins and HUD #1-#4 buttons)
+    mount.querySelectorAll(".hotspot-pin, .hud-pin-btn").forEach((pinBtn) => {
       const selectPin = (e) => {
         e.stopPropagation();
         state.activeHotspotIndex = parseInt(pinBtn.getAttribute("data-pin-idx"), 10);
         const currentCs = DATA.caseStudies[state.activeCaseIndex];
         const pin = currentCs.hotspots[state.activeHotspotIndex];
         mount.querySelectorAll(".hotspot-pin").forEach((b, i) => {
+          b.classList.toggle("active", i === state.activeHotspotIndex);
+        });
+        mount.querySelectorAll(".hud-pin-btn").forEach((b, i) => {
           b.classList.toggle("active", i === state.activeHotspotIndex);
         });
         if (pin && e.type === "click" && state.sliderPct < pin.x + 12) {
@@ -636,7 +656,9 @@
         }
       };
       pinBtn.addEventListener("click", selectPin);
-      pinBtn.addEventListener("mouseenter", selectPin);
+      if (pinBtn.classList.contains("hotspot-pin")) {
+        pinBtn.addEventListener("mouseenter", selectPin);
+      }
     });
 
     if (rangeSlider) {

@@ -14,7 +14,7 @@
     lang: localStorage.getItem("tyler_lang") || "en",
     activeCaseIndex: 0,
     activeHotspotIndex: 0,
-    sliderPct: 50,
+    sliderPct: 66,
     catalogCategory: "all",
     catalogSearch: "",
     reviewFilter: "all",
@@ -461,9 +461,9 @@
                 <img src="${cs.afterImg}" alt="After Repair — ${cs.title.en}" />
               </div>
 
-              <!-- BEFORE LAYER (Clipped Damaged Photo — 100% Reference-Locked) -->
-              <div id="baLayerBefore" class="ba-photo-layer ba-layer-before" style="clip-path: inset(0 ${100 - state.sliderPct}% 0 0);">
-                <img src="${cs.beforeImg}" alt="Before Repair — ${cs.title.en}" />
+              <!-- BEFORE LAYER (Width-Clipped Damaged Photo — 100% Reference-Locked, Zero clip-path WebKit Bugs) -->
+              <div id="baLayerBefore" class="ba-photo-layer ba-layer-before" style="width: ${state.sliderPct}%;">
+                <img id="baImgBefore" src="${cs.beforeImg}" alt="Before Repair — ${cs.title.en}" style="width: ${(10000 / state.sliderPct).toFixed(4)}%;" />
               </div>
 
               <span class="ba-corner-label ba-label-before">${t("slider.beforeBadge")}</span>
@@ -495,13 +495,15 @@
             </div>
 
             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; flex-wrap: wrap; gap: 0.65rem;">
-              <span class="mono" style="font-size: 0.74rem; color: #94A3B8;">
-                ← Drag Metal Divider or Use Arrow Keys →
-              </span>
+              <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                <button type="button" class="ba-quick-btn" data-quick-pct="95">💥 Full Damage</button>
+                <button type="button" class="ba-quick-btn" data-quick-pct="${state.activeCaseIndex === 1 ? 78 : 66}">↔ Split View</button>
+                <button type="button" class="ba-quick-btn" data-quick-pct="5">✨ Full Repair</button>
+              </div>
               <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1 1 200px; max-width: 100%;">
-                <span class="mono" style="font-size: 0.72rem; color: #FBBF24; flex-shrink: 0;">BEFORE</span>
+                <span class="mono" style="font-size: 0.7rem; color: #34D399; flex-shrink: 0;">← AFTER</span>
                 <input type="range" id="baRangeSlider" min="2" max="98" value="${state.sliderPct}" style="flex: 1; min-width: 90px; width: 100%; accent-color: #F59E0B; cursor: pointer;" />
-                <span class="mono" style="font-size: 0.72rem; color: #34D399; flex-shrink: 0;">AFTER</span>
+                <span class="mono" style="font-size: 0.7rem; color: #FBBF24; flex-shrink: 0;">BEFORE →</span>
               </div>
             </div>
           </div>
@@ -562,12 +564,46 @@
       </div>
     `;
 
+    // Bind Slider Dragging (Mouse, Touch, Range Input, Quick Buttons, Keyboard Arrows)
+    const viewport = document.getElementById("baViewport");
+    const rangeSlider = document.getElementById("baRangeSlider");
+    const beforeLayer = document.getElementById("baLayerBefore");
+    const beforeImg = document.getElementById("baImgBefore");
+    const handle = document.getElementById("baHandle");
+
+    function updatePosition(pct) {
+      const clamped = Math.max(2, Math.min(98, pct));
+      state.sliderPct = clamped;
+      if (beforeLayer) {
+        beforeLayer.style.width = `${clamped}%`;
+      }
+      if (beforeImg) {
+        beforeImg.style.width = `${(10000 / clamped).toFixed(4)}%`;
+      }
+      if (handle) {
+        handle.style.left = `${clamped}%`;
+      }
+      if (rangeSlider) {
+        rangeSlider.value = String(Math.round(clamped));
+      }
+    }
+
     // Bind Case Study Tab switches
     mount.querySelectorAll(".case-tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.activeCaseIndex = parseInt(btn.getAttribute("data-case-idx"), 10);
         state.activeHotspotIndex = 0;
+        // Position divider so vehicle damage is immediately visible
+        state.sliderPct = state.activeCaseIndex === 1 ? 78 : 66;
         renderBeforeAfterStudio();
+      });
+    });
+
+    // Bind Quick Mode Buttons (Full Damage / Split / Full Repair)
+    mount.querySelectorAll(".ba-quick-btn").forEach((qBtn) => {
+      qBtn.addEventListener("click", () => {
+        const targetPct = parseFloat(qBtn.getAttribute("data-quick-pct"));
+        if (!isNaN(targetPct)) updatePosition(targetPct);
       });
     });
 
@@ -581,6 +617,9 @@
         mount.querySelectorAll(".hotspot-pin").forEach((b, i) => {
           b.classList.toggle("active", i === state.activeHotspotIndex);
         });
+        if (pin && e.type === "click" && state.sliderPct < pin.x + 12) {
+          updatePosition(Math.min(95, pin.x + 15));
+        }
         const card = document.getElementById("hudActivePinCard");
         if (card && pin) {
           card.innerHTML = `
@@ -600,33 +639,48 @@
       pinBtn.addEventListener("mouseenter", selectPin);
     });
 
-    // Bind Slider Dragging (Mouse, Touch, Range Input, Keyboard Arrows)
-    const viewport = document.getElementById("baViewport");
-    const rangeSlider = document.getElementById("baRangeSlider");
-    const beforeLayer = document.getElementById("baLayerBefore");
-    const handle = document.getElementById("baHandle");
-
-    function updatePosition(pct) {
-      const clamped = Math.max(2, Math.min(98, pct));
-      state.sliderPct = clamped;
-      if (beforeLayer) beforeLayer.style.clipPath = `inset(0 ${100 - clamped}% 0 0)`;
-      if (handle) handle.style.left = `${clamped}%`;
-      if (rangeSlider) rangeSlider.value = String(Math.round(clamped));
-    }
-
     if (rangeSlider) {
       rangeSlider.addEventListener("input", () => updatePosition(parseFloat(rangeSlider.value)));
+      rangeSlider.addEventListener("change", () => updatePosition(parseFloat(rangeSlider.value)));
     }
 
     if (viewport) {
       let dragging = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
       const moveFromClientX = (clientX) => {
         const rect = viewport.getBoundingClientRect();
-        updatePosition(((clientX - rect.left) / rect.width) * 100);
+        if (rect.width > 0) {
+          updatePosition(((clientX - rect.left) / rect.width) * 100);
+        }
       };
 
+      // Direct Touch Events (always active on iOS Safari & Android Chrome)
+      viewport.addEventListener("touchstart", (e) => {
+        if (e.target.closest(".hotspot-pin")) return;
+        if (e.touches && e.touches[0]) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          moveFromClientX(e.touches[0].clientX);
+        }
+      }, { passive: true });
+
+      viewport.addEventListener("touchmove", (e) => {
+        if (e.target.closest(".hotspot-pin")) return;
+        if (e.touches && e.touches[0]) {
+          const dx = Math.abs(e.touches[0].clientX - touchStartX);
+          const dy = Math.abs(e.touches[0].clientY - touchStartY);
+          if (dx > dy && e.cancelable) {
+            e.preventDefault();
+          }
+          moveFromClientX(e.touches[0].clientX);
+        }
+      }, { passive: false });
+
+      // Mouse Events for Desktop
       viewport.addEventListener("mousedown", (e) => {
-        if (e.target.classList.contains("hotspot-pin")) return;
+        if (e.target.closest(".hotspot-pin")) return;
         dragging = true;
         moveFromClientX(e.clientX);
       });
@@ -636,14 +690,6 @@
       window.addEventListener("mouseup", () => {
         dragging = false;
       });
-
-      viewport.addEventListener("touchstart", (e) => {
-        if (e.target.classList.contains("hotspot-pin")) return;
-        if (e.touches && e.touches[0]) moveFromClientX(e.touches[0].clientX);
-      }, { passive: true });
-      viewport.addEventListener("touchmove", (e) => {
-        if (e.touches && e.touches[0]) moveFromClientX(e.touches[0].clientX);
-      }, { passive: true });
 
       viewport.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") {
